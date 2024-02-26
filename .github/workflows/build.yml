@@ -1,24 +1,39 @@
 
-name : Lunch-Reservation
+name: Lunch reserver team6
 
 on:
   push:
-    branches : ["main"]
+    branches: [ "main" ]
   pull_request:
-    branches : ["main"]
+    branches: [ "main" ]
 
 jobs:
-  db:
+  build:
+
     runs-on: ubuntu-latest
-    container:
-      image: postgres:latest
-      ports:
-        - 5432:5432
-      env:
-        POSTGRES_USER: postgres
-        POSTGRES_PASSWORD: postgres
-        POSTGRES_DB: test
+    permissions:
+      contents: read
 
+    services:
+      postgres:
+         image: postgres:latest
+         ports:
+          - 5432:5432
+         env:
+           POSTGRES_USER: postgres
+           POSTGRES_PASSWORD: postgres
+           POSTGRES_DB: test
+          
 
+    steps:
+    - uses: actions/checkout@v4
+    - name: Set up JDK 21
+      uses: actions/setup-java@v4
+      with:
+        java-version: '21'
 
-
+    - name: Build with Gradle Wrapper
+      run: ./gradlew build
+    - name: Basic check
+      run: |
+        echo "hello"
