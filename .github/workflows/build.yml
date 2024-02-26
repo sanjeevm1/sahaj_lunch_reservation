@@ -31,9 +31,7 @@ jobs:
       uses: actions/setup-java@v4
       with:
         java-version: '21'
+        distribution: 'temurin'
 
     - name: Build with Gradle Wrapper
       run: ./gradlew build
-    - name: Basic check
-      run: |
-        echo "hello"
