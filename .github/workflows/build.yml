@@ -64,6 +64,6 @@ jobs:
           IMAGE_TAG: ${{ github.sha }}
         run: |
 
-          docker build -t $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG .
-          docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
-          echo "image=$ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG" >> $GITHUB_OUTPUT
+          docker build -t ci-gurukul-team6-pair-ms .
+          docker tag ci-gurukul-team6-pair-ms:latest 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
+          docker push 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
