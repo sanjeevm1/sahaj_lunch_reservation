@@ -28,6 +28,5 @@ jobs:
         run: docker pull 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
       - name: run container
         run: docker run -p 8080:8080 -d 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
-      - name: exit
-        run: exit
+
 
