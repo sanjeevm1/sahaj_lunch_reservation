@@ -9,5 +9,9 @@ jobs:
     runs-on: self-hosted
     steps:
       - name: executing remote ssh commands using password
-        run: ssh madhveshs@192.168.1.223
+        run: sshpass -p "M@dhvesh0703" ssh madhveshs@192.168.1.223
+      - name: exec ls
+        run: ls
+      - name: exit
+        run: exit
 
