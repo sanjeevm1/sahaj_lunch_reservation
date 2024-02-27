@@ -43,7 +43,6 @@ jobs:
           java-version: '21'
           distribution: 'temurin'
           
-      - name: Run Integration tests
       - run: export POSTGRES_URL jdbc:postgresql://localhost:5432/test
       - run: export POSTGRES_USERNAME=postgres
       - run: export POSTGRES_PASSWORD=postgres
