@@ -25,6 +25,8 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
       - name: Run unit tests
         run: ./gradlew test --tests "LoginServiceUnitTest"
   Integration_test:
@@ -45,6 +47,8 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
+      - name: Build with Gradle Wrapper
+        run: ./gradlew build
       - name: Run Integration tests
         run: ./gradlew test --tests "gkl.exercise.LunchReservationServerTestEntityController"
   Ci_ECR:
