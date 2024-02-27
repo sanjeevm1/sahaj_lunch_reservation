@@ -26,7 +26,9 @@ jobs:
         uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
       - name: pull image
         run: docker pull 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
+      - name: docker ls
+        run: docker images
       - name: run container
-        run: docker run -p 8080:8080 -d 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
+        run: docker run -p 8080:8080  331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
 
 
