@@ -89,3 +89,11 @@ jobs:
           docker build -t ci-gurukul-team6-pair-ms .
           docker tag ci-gurukul-team6-pair-ms:latest 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
           docker push 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
+  Deploy:
+    name: Deploy on seperate machine
+    runs-on: ubuntu-latest
+    steps:
+      - name: Login using ssh
+        run: |
+          ssh madhveshs@192.168.1.223
+          ${{ secrets.SSH_PASSWORD }}
