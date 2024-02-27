@@ -9,7 +9,7 @@ on:
 jobs:
   Unit_test:
     name: Run unit Tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
       - name: Load directory
         uses: actions/checkout@v4
@@ -22,17 +22,8 @@ jobs:
         run: ./gradlew test --tests "LoginServiceUnitTest"
   Integration_test:
     name: Run Integration Tests
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     needs: Unit_test
-    services:
-      postgres:
-        image: postgres:latest
-        ports:
-          - 5432:5432
-        env:
-          POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
-          POSTGRES_DB: test
     steps:
       - name: Load directory
         uses: actions/checkout@v4
