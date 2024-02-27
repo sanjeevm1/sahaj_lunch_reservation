@@ -24,18 +24,30 @@ jobs:
     name: Run Integration Tests
     runs-on: self-hosted
     needs: Unit_test
+    services:
+            postgres:
+              image: postgres:latest
+              ports:
+                - 5432:5432
+              env:
+                POSTGRES_USER: postgres
+                POSTGRES_PASSWORD: postgres
+                POSTGRES_DB: test
     steps:
       - name: Load directory
         uses: actions/checkout@v4
+        
       - name: Setup java 21
         uses: actions/setup-java@v4
         with:
           java-version: '21'
           distribution: 'temurin'
-      - name: Build with Gradle Wrapper
-        run: ./gradlew build
+          
       - name: Run Integration tests
-        run: ./gradlew test --tests "gkl.exercise.LunchReservationServerTestEntityController"
+      - run: export POSTGRES_URL jdbc:postgresql://localhost:5432/test
+      - run: export POSTGRES_USERNAME=postgres
+      - run: export POSTGRES_PASSWORD=postgres
+      - run: ./gradlew test --tests "gkl.exercise.LunchReservationServerTestEntityController"
   Store_ECR:
     name: Store artifact on ecr
     runs-on: ubuntu-latest
@@ -63,7 +75,10 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle Wrapper
-        run: ./gradlew build
+      - run: export POSTGRES_URL jdbc:postgresql://localhost:5432/test
+      - run: export POSTGRES_USERNAME=postgres
+      - run: export POSTGRES_PASSWORD=postgres
+      - run: ./gradlew build
       - name: View Directory
         run: ls
 
@@ -89,11 +104,3 @@ jobs:
           docker build -t ci-gurukul-team6-pair-ms .
           docker tag ci-gurukul-team6-pair-ms:latest 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
           docker push 331061725593.dkr.ecr.ap-south-1.amazonaws.com/ci-gurukul-team6-pair-ms:latest
-  Deploy:
-    name: Deploy on seperate machine
-    runs-on: ubuntu-latest
-    steps:
-      - name: Login using ssh
-        run: |
-          ssh madhveshs@192.168.1.223
-          ${{ secrets.SSH_PASSWORD }}
