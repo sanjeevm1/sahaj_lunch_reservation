@@ -24,6 +24,8 @@ jobs:
       - name: Login to Amazon ECR
         id: login-ecr
         uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+      - name: docker login
+        run: aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 331061725593.dkr.ecr.ap-south-1.amazonaws.com
       - name: pull image
         run: docker pull ci-gurukul-team6-pair-ms
       - name: run container
