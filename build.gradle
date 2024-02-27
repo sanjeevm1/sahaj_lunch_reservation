@@ -80,4 +80,8 @@ tasks.named("dockerfileNative") {
     jdkVersion = "21"
 }
 
+sourceSets {
+    test.java.srcDirs += 'src/Unit/Kotlin'
+}
+
 
