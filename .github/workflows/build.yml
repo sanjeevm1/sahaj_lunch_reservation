@@ -45,8 +45,8 @@ jobs:
         run: ./gradlew build
       - name: Run Integration tests
         run: ./gradlew test --tests "gkl.exercise.LunchReservationServerTestEntityController"
-  Ci_ECR:
-    name: CI on ecr
+  Store_ECR:
+    name: Store artifact on ecr
     runs-on: ubuntu-latest
     needs: Integration_test
     permissions:
