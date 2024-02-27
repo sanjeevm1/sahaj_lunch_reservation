@@ -42,11 +42,12 @@ jobs:
         with:
           java-version: '21'
           distribution: 'temurin'
-          
-      - run: export POSTGRES_URL jdbc:postgresql://localhost:5432/test
-      - run: export POSTGRES_USERNAME=postgres
-      - run: export POSTGRES_PASSWORD=postgres
-      - run: ./gradlew test --tests "gkl.exercise.LunchReservationServerTestEntityController"
+      - name: Integration test
+        env:
+          POSTGRES_URL: jdbc:postgresql://localhost:5432/test
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+        run: ./gradlew test --tests "gkl.exercise.LunchReservationServerTestEntityController"
   Store_ECR:
     name: Store artifact on ecr
     runs-on: ubuntu-latest
@@ -74,10 +75,11 @@ jobs:
           distribution: 'temurin'
 
       - name: Build with Gradle Wrapper
-      - run: export POSTGRES_URL jdbc:postgresql://localhost:5432/test
-      - run: export POSTGRES_USERNAME=postgres
-      - run: export POSTGRES_PASSWORD=postgres
-      - run: ./gradlew build
+        env:
+          POSTGRES_URL: jdbc:postgresql://localhost:5432/test
+          POSTGRES_USERNAME: postgres
+          POSTGRES_PASSWORD: postgres
+        run: ./gradlew build
       - name: View Directory
         run: ls
 
