@@ -26,7 +26,6 @@ jobs:
         uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
 
       - name: run container
-        id: run container
         run: docker run -p 8080:8080 -d ci-gurukul-team6-pair-ms
       - name: exit
         run: exit
