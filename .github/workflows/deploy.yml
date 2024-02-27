@@ -4,14 +4,30 @@ on:
     branches: ["main"]
 
 jobs:
-  build:
-    name: Build
+  deploy:
+    name: deploy
     runs-on: self-hosted
     steps:
       - name: executing remote ssh commands using password
         run: sshpass -p "M@dhvesh0703" ssh madhveshs@192.168.1.223
-      - name: exec ls
-        run: ls
+      - name: clone config repo
+        run: git clone https://github.com/Madhvesh77/Lunch-reservation-env
+      - name: check lunch-reservation
+        run: cd Lunch-reservation-env && ls
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@0e613a0980cbf65ed5b322eb7a1e075d28913a83
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_KEY }}
+          aws-region: ap-south-1
+
+      - name: Login to Amazon ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@62f4f872db3836360b72999f4b87f1ff13310f3a
+
+      - name: run container
+        id: run container
+        run: docker run -p 8080:8080 -d ci-gurukul-team6-pair-ms
       - name: exit
         run: exit
 
