@@ -10,8 +10,7 @@ jobs:
     steps:
       - name: executing remote ssh commands using password
         run: |
-          ssh raguls@192.168.1.231
-          whoami
+          ssh raguls@192.168.1.231 whoami
       
       - name: Login to Amazon ECR
         id: login-ecr
