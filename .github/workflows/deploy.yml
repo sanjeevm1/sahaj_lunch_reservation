@@ -11,8 +11,7 @@ jobs:
       - name: executing remote ssh commands using password
         run: |
           ssh ${{secrets.HOST}}
-          git clone https://github.com/Madhvesh77/Lunch-reservation-env
-          cd Lunch-reservation-env && ls
+          whoami
       
       - name: Login to Amazon ECR
         id: login-ecr
